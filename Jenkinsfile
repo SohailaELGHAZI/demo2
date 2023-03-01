@@ -1,18 +1,15 @@
-node {
-  stage("Clone the project") {
-    git branch: 'master', url: 'https://github.com/SohailaELGHAZI/demo2.git'
-  }
-
-  stage("Compilation") {
-    sh "./mvnw clean install -DskipTests"
-  }
-
-  stage("Tests and Deployment") {
-    stage("Runing unit tests") {
-      sh "./mvnw test -Punit"
+pipeline {
+    agent {
+        docker {
+            image 'maven:3.9.0-eclipse-temurin-11'
+            args '-v /root/.m2:/root/.m2'
+        }
     }
-    stage("Deployment") {
-      sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
     }
-  }
 }
