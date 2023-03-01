@@ -4,15 +4,15 @@ node {
   }
 
   stage("Compilation") {
-    sh "echo 'hii' "
+    sh "./mvnw clean install -DskipTests"
   }
 
   stage("Tests and Deployment") {
     stage("Runing unit tests") {
-      sh "echo 'hello'"
+      sh "./mvnw test -Punit"
     }
     stage("Deployment") {
-      sh "echo 'bonjour'"
+      sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
     }
   }
 }
