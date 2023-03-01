@@ -4,7 +4,7 @@ node {
   }
 
   stage("Compilation") {
-    sh ".hii"
+    sh "hii"
   }
 
   stage("Tests and Deployment") {
