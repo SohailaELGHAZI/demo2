@@ -1,15 +1,18 @@
-pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.0-eclipse-temurin-11'
-            args '-v /root/.m2:/root/.m2'
-        }
+node {
+  stage("Clone the project") {
+    git branch: 'master', url: 'https://github.com/SohailaELGHAZI/demo2.git'
+  }
+
+  stage("Compilation") {
+    sh ".hii"
+  }
+
+  stage("Tests and Deployment") {
+    stage("Runing unit tests") {
+      sh "hello"
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
+    stage("Deployment") {
+      sh 'bonjour'
     }
+  }
 }
