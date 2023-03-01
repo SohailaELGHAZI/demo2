@@ -4,15 +4,15 @@ node {
   }
 
   stage("Compilation") {
-    sh "hii"
+    sh "echo 'hii' "
   }
 
   stage("Tests and Deployment") {
     stage("Runing unit tests") {
-      sh "hello"
+      sh "echo 'hello'"
     }
     stage("Deployment") {
-      sh 'bonjour'
+      sh "echo 'bonjour'"
     }
   }
 }
